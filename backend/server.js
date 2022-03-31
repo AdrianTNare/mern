@@ -36,6 +36,16 @@ app.use(compression());
 app.use(cookieParser());
 
 // allow AJAX requests to skip the Same-origin policy and access resources from remote hosts
+// const whitelist = ['http://127.0.0.1'];
+// const corsOptions = {
+//   credentail: true,
+//   origin: (origin, callback) => {
+//     if(whitelist.includes(origin)) return callback(null, true);
+
+//     callback(new Error('fuckoff'))
+//   }
+// }
+
 app.use(cors());
 
 // serve a visual favicon for the browser
@@ -76,6 +86,17 @@ mongoose
     console.log(emoji.get('heavy_check_mark'), 'MongoDB connection success');
   });
 
+
+// set Access control allow origin headers
+
+app.all((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+
+
+
 // routes
 app.use('/', indexRouter);
 app.use('/crawler', crawlerRouter);
@@ -83,6 +104,8 @@ app.use('/crawler', crawlerRouter);
 // setup ip address and port number
 app.set('port', process.env.PORT || 3000);
 app.set('ipaddr', '0.0.0.0');
+
+
 
 // start express server
 app.listen(app.get('port'), app.get('ipaddr'), function () {
