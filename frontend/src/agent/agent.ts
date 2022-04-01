@@ -13,11 +13,11 @@ const requests = {
   del: (url: string) =>
     superagent.del(`${API}${url}`).use(httpHeaders).then(responseBody),
   get: (url: string) =>
-    superagent.get(`${API}${url}`).use(httpHeaders).then(responseBody),
+    superagent.get(`${API}${url}`).withCredentials().use(httpHeaders).then(responseBody),
   put: (url: string, body: any) =>
     superagent.put(`${API}${url}`, body).use(httpHeaders).then(responseBody),
   post: (url: string, body: any) =>
-    superagent.post(`${API}${url}`, body).use(httpHeaders).then(responseBody),
+    superagent.post(`${API}${url}`, body).withCredentials().use(httpHeaders).then(responseBody),
 };
 
 const Crawler = {

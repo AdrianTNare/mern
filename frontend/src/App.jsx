@@ -3,11 +3,16 @@ import React from 'react';
 import Router from './Router';
 
 const theme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: '#4e42f5'
+    }
+  },
   overrides: {
     MuiCssBaseline: {
       '@global': {
         body: {
-          overflow: 'scroll',
+          overflow: 'scroll'
         }
       }
     }
